@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<!-- From https://codepen.io/frytyler/pen/EGdtg -->
+<head>
+  <meta charset="UTF-8">
+  <title>DL API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+        font-family: 'Arimo', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('emotion image.png');
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+    }
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.9); /* Adjust the opacity as needed */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+    h1 {
+        font-family: 'Pacifico', cursive;
+        margin-bottom: 20px;
+    }
+    input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: #ffffff;
+        cursor: pointer;
+        width: 100%;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>Emotion Analysis</h1>
+    <form action="{{ url_for('predict') }}" method="post">
+      <input type="text" name="text" placeholder="Enter here" required="required" onfocus="clearResult()" />
+      <button type="submit" class="btn btn-primary btn-block btn-large">Analyze</button>
+    </form>
+    <br>
+    <br>
+    <div class="result">{{ prediction_text }}</div>
+  </div>
+  <script>
+    function clearResult() {
+        document.querySelector('.result').innerHTML = '';
+    }
+  </script>
+</body>
+</html>
